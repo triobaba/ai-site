@@ -1,26 +1,20 @@
-# ------------ Front-end build stage ------------
 FROM node:18 AS frontend-builder
 WORKDIR /app
 COPY frontend ./frontend
 RUN cd frontend \
-    && npm ci --legacy-peer-deps \
+    && npm install --legacy-peer-deps --no-fund --no-audit \
     && npm run build
 
-# ------------ Backend stage ------------
 FROM python:3.11-slim
 WORKDIR /app
 
-# Install Python dependencies
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend source code
 COPY fastapi_app.py ./
 
-# Copy pre-built frontend assets from previous stage
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-# Runtime environment
 ENV PYTHONUNBUFFERED=1
 ENV OPENAI_API_KEY=""
 
