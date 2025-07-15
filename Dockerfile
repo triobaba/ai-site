@@ -22,8 +22,8 @@ COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
 # Runtime environment
 ENV PYTHONUNBUFFERED=1
-ENV OPENAI_API_KEY=""  # Render injects real value at runtime
+ENV OPENAI_API_KEY=""
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "uvicorn fastapi_app:app --host 0.0.0.0 --port ${PORT:-8000}"] 
+CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "8000"] 
