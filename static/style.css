@@ -1,0 +1,18 @@
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050; /* above Bootstrap's backdrop */
+}
+
+/* Smooth fade-in for result */
+#resultArea {
+  transition: opacity 0.2s ease-in;
+  opacity: 1;
+}
+#resultArea.d-none {
+  opacity: 0;
+} 
