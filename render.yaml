@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: ai-site-search
+    env: python
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      cd frontend && npm install --legacy-peer-deps && npm run build && cd ..
+    startCommand: uvicorn fastapi_app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false 
