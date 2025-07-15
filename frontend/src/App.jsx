@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ReactMarkdown from 'react-markdown';
 
 export default function App() {
   const [site, setSite] = useState('');
@@ -55,7 +56,15 @@ export default function App() {
           ) : (
             <>
               <h5>Answer</h5>
-              <div>{answer}</div>
+              <ReactMarkdown
+                components={{
+                  a: ({ node, ...props }) => (
+                    <a {...props} target="_blank" rel="noopener noreferrer" />
+                  ),
+                }}
+              >
+                {answer}
+              </ReactMarkdown>
               {citations.length > 0 && (
                 <div className="mt-3 small text-muted">
                   Sources: {citations.map((c) => (
