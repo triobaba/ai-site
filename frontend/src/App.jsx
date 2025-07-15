@@ -66,10 +66,17 @@ export default function App() {
                 {answer}
               </ReactMarkdown>
               {citations.length > 0 && (
-                <div className="mt-3 small text-muted">
-                  Sources: {citations.map((c) => (
-                    <a key={c.index} href={c.url} target="_blank" rel="noopener noreferrer">[{c.index}] </a>
-                  ))}
+                <div className="mt-4">
+                  <h6>Sources</h6>
+                  <ol className="small">
+                    {citations.map((c) => (
+                      <li key={c.index}>
+                        <a href={c.url} target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                          {c.url}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
                 </div>
               )}
             </>
